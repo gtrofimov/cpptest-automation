@@ -50,14 +50,13 @@ steps:
 
     docker run -i \
     -u 0:0 \
-    -e ACCEPT_EULA=true \
     -v "$(pwd)/tmp:/tmp" \
     parasoft/cpptest:latest /bin/bash -c " \
     cat /tmp/cpptestcli.properties; \
     cpptestcli \
+    -settings /tmp/cpptestcli.properties \
     -compiler gcc_10-64 \
     -config "builtin://Recommended Rules" \
-    -settings /tmp/cpptestcli.properties \
     -module /opt/parasoft/cpptest/examples/ATM \
     -report /tmp \
     -trace make clean all"
