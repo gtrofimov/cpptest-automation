@@ -26,16 +26,11 @@ steps:
     echo  -e "\n~~~\nSetting up and creating cpptestcli.properties file.\n"
     echo $"
     parasoft.eula.accepted=true
-    license.network.auth.enabled=true  
+    cpptest.license.network.edition=server_compliance_edition
+    license.network.auth.enabled=true
     license.network.password=$(license.server.password)
     license.network.url=$(license.server.url)
-    license.network.use.specified.server=true
     license.network.user=$(license.server.username)
-    dtp.enabled=false
-    dtp.password=$(license.server.password)
-    dtp.project=$(dtp.project)
-    dtp.url=$(dtp.url)
-    dtp.user=$(license.server.username)
     report.dtp.publish=false
     build.id=$(build.id)" >> tmp/cpptestcli.properties
     echo -e "\nDebug -- Verify workspace contents.\n"
