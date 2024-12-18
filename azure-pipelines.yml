@@ -27,6 +27,7 @@ steps:
     echo $"
     parasoft.eula.accepted=true
     cpptest.license.network.edition=server_compliance_edition
+    license.network.enabled=true
     license.network.auth.enabled=true
     license.network.password=$(license.server.password)
     license.network.url=$(license.server.url)
