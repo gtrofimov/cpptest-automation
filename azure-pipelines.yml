@@ -1,0 +1,73 @@
+
+# Starter pipeline
+# Pull from Repo
+# Import Project into Docekr SOAtest CLI container and Run
+# Azure YAML docs:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+# Set Up Project
+steps:
+- script: |
+    echo "Starting Pipeline Execution."
+    echo "Create ./tmp directory for volume mount."
+    mkdir tmp
+    echo ${PWD}
+    
+    # Get Artifacts from Jenkins
+    # curl -u $(license.server.username):$(license.server.password) '$(jenkins.url)/job/Parabank-Jenkins%20(main%20branch)/lastSuccessfulBuild/artifact/parabank/target/parabank-3.0.0-SNAPSHOT.war' --output "tmp/parabank.war"
+    
+    # Set Up and write .properties file
+    echo  -e "\n~~~\nSetting up and creating cpptestcli.properties file.\n"
+    echo $"
+    license.network.auth.enabled=true  
+    license.network.password=$(license.server.password)
+    license.network.url=$(license.server.url)
+    license.network.use.specified.server=true
+    license.network.user=$(license.server.username)
+    dtp.enabled=false
+    dtp.password=$(license.server.password)
+    dtp.project=$(dtp.project)
+    dtp.url=$(dtp.url)
+    dtp.user=$(license.server.username)
+    report.dtp.publish=false
+    build.id=$(build.id)" >> tmp/cpptestcli.properties
+    echo -e "\nDebug -- Verify workspace contents.\n"
+    ls -R
+    echo -e "\nDebug -- Verify cpptestcli.properties file contents."
+    cat tmp/cpptestcli.properties
+
+    # Run Docker container with mount and run tests
+    echo -e "\n~~~\nRun cpptestcli Docker container & mount ./tmp volume.\n"
+    
+    docker --version
+
+    docker run --rm -v $PWD:$PWD \
+    -w /opt/parasoft/cpptest/examples/ATM parasoft/cpptest cpptestcli \
+    -v "$(pwd)/tmp:/tmp"
+    -compiler gcc_10-64 \
+    -config "builtin://Recommended Rules" \
+    -settings $(pwd)/cpptestcli.properties \
+    -report $(pwd)/tmp \
+    -module . \
+    -trace make clean all
+
+    # echo -e "\nDebug -- Verify ./tmp contents\n"
+    # ls -R $(pwd)/tmp
+  displayName: Run Tests
+  env:
+    pwd: $(Build.Repository.LocalPath)
+
+# Publish Test Results
+- task: PublishParasoftResults@1
+  inputs:
+    resultsFiles: |
+      **/rep*.xml
+      **/rep*.sarif
+      **/coverage.xml
+    mergeTestResults: true
