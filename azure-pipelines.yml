@@ -55,10 +55,10 @@ steps:
     parasoft/cpptest:latest /bin/bash -c " \
     cat /tmp/cpptestcli.properties; \
     cpptestcli \
-    -module /opt/parasoft/cpptest/examples/ATM \
     -compiler gcc_10-64 \
     -config "builtin://Recommended Rules" \
     -settings /tmp/cpptestcli.properties \
+    -module /opt/parasoft/cpptest/examples/ATM \
     -report /tmp \
     -trace make clean all"
 
