@@ -25,6 +25,7 @@ steps:
     # Set Up and write .properties file
     echo  -e "\n~~~\nSetting up and creating cpptestcli.properties file.\n"
     echo $"
+    parasoft.eula.accepted=true
     license.network.auth.enabled=true  
     license.network.password=$(license.server.password)
     license.network.url=$(license.server.url)
@@ -59,7 +60,7 @@ steps:
 
     # echo -e "\nDebug -- Verify ./tmp contents\n"
     # ls -R $(pwd)/tmp
-  displayName: Run Tests
+  displayName: Run Static Analysis
   env:
     pwd: $(Build.Repository.LocalPath)
 
