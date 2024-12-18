@@ -59,7 +59,7 @@ steps:
     -compiler gcc_10-64 \
     -config "builtin://Recommended Rules" \
     -settings /tmp/cpptestcli.properties \
-    -report /tmp" \
+    -report /tmp \
     -trace make clean all"
 
     # echo -e "\nDebug -- Verify ./tmp contents\n"
