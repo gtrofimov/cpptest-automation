@@ -47,13 +47,13 @@ steps:
     docker run -i \
     -u 0:0 \
     -v "$(pwd)/tmp:/tmp" \
+    -w /opt/parasoft/cpptest/examples/ATM \
     parasoft/cpptest:latest /bin/bash -c " \
     pwd; ls -la; cat /tmp/cpptestcli.properties; \
     cpptestcli \
     -settings /tmp/cpptestcli.properties \
     -compiler gcc_10-64 \
     -config 'builtin://Recommended Rules' \
-    -resource /opt/parasoft/cpptest/examples/ATM \
     -module . \
     -report /tmp \
     -trace make clean all"
