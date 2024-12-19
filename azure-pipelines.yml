@@ -48,7 +48,7 @@ steps:
     -u 0:0 \
     -v "$(pwd)/tmp:/tmp" \
     parasoft/cpptest:latest /bin/bash -c " \
-    pwd; ls -la; cat /tmp/cpptestcli.properties; cd /opt/parasoft/cpptest/examples/ATM \
+    pwd; ls -la; cat /tmp/cpptestcli.properties; cd /opt/parasoft/cpptest/examples/ATM; \
     cpptestcli \
     -settings /tmp/cpptestcli.properties \
     -compiler gcc_10-64 \
