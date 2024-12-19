@@ -55,7 +55,7 @@ steps:
     -config 'builtin://Recommended Rules' \
     -module /opt/parasoft/cpptest/examples/ATM \
     -report /tmp \
-    -trace make all"
+    -trace 'make clean all'"
 
     # echo -e "\nDebug -- Verify ./tmp contents\n"
     # ls -R $(pwd)/tmp
