@@ -70,6 +70,6 @@ steps:
     resultsFiles: |
       **/rep*.xml
       **/tmp/report.xml
-      **/rep*.sarif
+      **/*.sarif
       **/coverage.xml
     mergeTestResults: true
