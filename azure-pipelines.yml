@@ -69,7 +69,7 @@ steps:
   inputs:
     resultsFiles: |
       **/rep*.xml
-      /tmp/report.xml
+      **/tmp/report.xml
       **/rep*.sarif
       **/coverage.xml
     mergeTestResults: true
