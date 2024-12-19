@@ -53,7 +53,7 @@ steps:
     -settings /tmp/cpptestcli.properties \
     -compiler gcc_10-64 \
     -config 'builtin://Recommended Rules' \
-    -module /opt/parasoft/cpptest/examples/ATM \
+    -module /opt/parasoft/cpptest/examples/ATM/. \
     -report /tmp \
     -trace 'make clean all'"
 
