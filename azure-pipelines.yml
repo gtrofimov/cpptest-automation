@@ -36,7 +36,7 @@ steps:
     dtp.user=$(license.server.username)
     dtp.password=$(license.server.password)
     dtp.project=Timer
-    report.dtp.publish=false" >> tmp/cpptestcli.properties
+    report.dtp.publish=true" >> tmp/cpptestcli.properties
 
     echo -e "\nDebug -- Verify workspace contents.\n"
     ls -R
