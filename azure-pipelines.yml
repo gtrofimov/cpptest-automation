@@ -32,6 +32,10 @@ steps:
     license.network.password=$(license.server.password)
     license.network.url=$(license.server.url)
     license.network.user=$(license.server.username)
+    dtp.url=$(dtp.url)
+    dtp.user=$(license.server.username)
+    dtp.password=$(license.server.password)
+    dtp.project=Timer
     report.dtp.publish=false" >> tmp/cpptestcli.properties
 
     echo -e "\nDebug -- Verify workspace contents.\n"
@@ -53,7 +57,7 @@ steps:
     cpptestcli \
     -settings /tmp/cpptestcli.properties \
     -compiler gcc_10-64 \
-    -config 'builtin://Recommended Rules' \
+    -config 'builtin://MISRA C 2023 (MISRA C 2012)' \
     -module . \
     -report /tmp \
     -property report.format=xml,html,sarif-azure \
