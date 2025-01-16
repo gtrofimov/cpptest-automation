@@ -35,7 +35,7 @@ steps:
     dtp.url=$(dtp.url)
     dtp.user=$(license.server.username)
     dtp.password=$(license.server.password)
-    dtp.project=Timer
+    dtp.project=ATM
     report.dtp.publish=true" >> tmp/cpptestcli.properties
 
     echo -e "\nDebug -- Verify workspace contents.\n"
