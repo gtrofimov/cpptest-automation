@@ -61,7 +61,7 @@ steps:
     -module . \
     -report /tmp \
     -property report.format=xml,html,sarif-azure \
-    -showdetails -appconsole stdout \
+    -showdetails \
     -trace make clean all"
 
     # echo -e "\nDebug -- Verify ./tmp contents\n"
