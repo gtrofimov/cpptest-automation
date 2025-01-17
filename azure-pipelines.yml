@@ -36,6 +36,7 @@ steps:
     dtp.user=$(license.server.username)
     dtp.password=$(license.server.password)
     dtp.project=ATM
+    build.id=ATM-2025-01-15
     report.dtp.publish=true" >> tmp/cpptestcli.properties
 
     echo -e "\nDebug -- Verify workspace contents.\n"
@@ -54,15 +55,25 @@ steps:
     -w /opt/parasoft/cpptest/examples/ATM \
     parasoft/cpptest:latest /bin/bash -c " \
     pwd; ls -la; cat /tmp/cpptestcli.properties; \
+    mkdir build; cd build; cmake ..; cd ..; \
     cpptestcli \
     -settings /tmp/cpptestcli.properties \
-    -compiler gcc_10-64 \
-    -config 'builtin://MISRA C 2023 (MISRA C 2012)' \
+    -compiler gcc_9-64 \
+    -config 'builtin://MISRA C++ 2023' \
     -module . \
     -report /tmp \
     -property report.format=xml,html,sarif-azure \
     -showdetails \
-    -trace make clean all"
+    -input compile_commands.json; \
+    cpptestcli \
+    -settings /tmp/cpptestcli.properties \
+    -compiler gcc_9-64 \
+    -config 'builtin://SEI CERT C++ Rules' \
+    -module . \
+    -report /tmp \
+    -property report.format=xml,html,sarif-azure \
+    -showdetails \
+    -input compile_commands.json"
 
     # echo -e "\nDebug -- Verify ./tmp contents\n"
     # ls -R $(pwd)/tmp
